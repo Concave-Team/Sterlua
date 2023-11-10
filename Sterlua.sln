@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sterlua", "Sterlua\Sterlua.csproj", "{2F8CF14A-9B07-43DB-BAAB-0D93555E4B9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SterluaTC", "SterluaTC\SterluaTC.csproj", "{0ABD38D5-49F3-4D31-BDA1-F1B96D98EB71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F8CF14A-9B07-43DB-BAAB-0D93555E4B9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8CF14A-9B07-43DB-BAAB-0D93555E4B9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8CF14A-9B07-43DB-BAAB-0D93555E4B9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8CF14A-9B07-43DB-BAAB-0D93555E4B9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ABD38D5-49F3-4D31-BDA1-F1B96D98EB71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ABD38D5-49F3-4D31-BDA1-F1B96D98EB71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ABD38D5-49F3-4D31-BDA1-F1B96D98EB71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ABD38D5-49F3-4D31-BDA1-F1B96D98EB71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {66323C5B-0C99-429C-ABAD-8905885E40B5}
+	EndGlobalSection
+EndGlobal
