@@ -88,13 +88,13 @@ namespace Sterlua.CodeGen.Parser
                 Console.WriteLine("FC: " + CurrentToken.Value.Equals(')'));
                 ParameterList.Add(ParseExpression());
 
-                if (Peek(1).Value.Equals(','))
+                if (CurrentToken.Value.Equals(','))
                 {
-                    Next();
                     ConsumeWithValue(TokenType.o_symbol, ',');
                 }
             }
 
+            ConsumeWithValue(TokenType.o_symbol, ')');
             return new FunctionCallExpression((string)NameIdent.Value, ParameterList);
         }
 
@@ -277,7 +277,7 @@ namespace Sterlua.CodeGen.Parser
                         continue;
                     case TokenType.k_function:
                         Statements.Add(ParseFn());
-                        break;
+                        continue;
                     case TokenType.o_identifier:
                         // CTXs - /< >/ identifier var; /identifier/(...) call/
                         // if =, then - CTX = var, if ( - CTX = call.

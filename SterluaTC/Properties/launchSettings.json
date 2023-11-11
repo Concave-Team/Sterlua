@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SterluaTC": {
+      "commandName": "Project",
+      "commandLineArgs": "test.lua"
+    }
+  }
+}
