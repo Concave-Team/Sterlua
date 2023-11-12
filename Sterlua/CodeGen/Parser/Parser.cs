@@ -307,6 +307,11 @@ namespace Sterlua.CodeGen.Parser
     {
         public string Name;
 
+        public static IdentifierType Number => new IdentifierType("number");
+        public static IdentifierType String => new IdentifierType("string");
+        public static IdentifierType Bool => new IdentifierType("bool");
+        public static IdentifierType Void => new IdentifierType("void");
+
         public IdentifierType(string name)
         {
             Name = name;

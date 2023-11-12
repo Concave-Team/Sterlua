@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="CodeGen\Bytecode\" />
-    <Folder Include="CodeGen\Semantic\" />
   </ItemGroup>
 
 </Project>

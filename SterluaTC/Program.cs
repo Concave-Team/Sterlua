@@ -1,5 +1,6 @@
 ﻿using Sterlua.CodeGen.Lexer;
 using Sterlua.CodeGen.Parser;
+using Sterlua.CodeGen.Semantic;
 using System.Runtime.CompilerServices;
 
 namespace SterluaTC
@@ -21,6 +22,7 @@ namespace SterluaTC
                 Parser parser = new Parser();
                 var statements = parser.Run(toks);
                 Console.WriteLine(statements.Count);
+                var sem = new Binder().Run(statements);
             }
         }
     }
