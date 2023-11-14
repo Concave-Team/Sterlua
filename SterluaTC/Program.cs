@@ -1,4 +1,5 @@
-﻿using Sterlua.CodeGen.Lexer;
+﻿using Sterlua.CodeGen.Bytecode;
+using Sterlua.CodeGen.Lexer;
 using Sterlua.CodeGen.Parser;
 using Sterlua.CodeGen.Semantic;
 using System.Runtime.CompilerServices;
@@ -22,7 +23,34 @@ namespace SterluaTC
                 Parser parser = new Parser();
                 var statements = parser.Run(toks);
                 Console.WriteLine(statements.Count);
-                var sem = new Binder().Run(statements);
+                //var sem = new Binder().Run(statements);
+
+                LuaState stateTest = new LuaState();
+
+                /*
+                    CALL print "Function Test Initialized"
+                    
+                    LABEL testfn
+                    call print "This is from the function!"
+                    RETURN VOID
+
+                    CALL testfn
+                 */
+                // My special bytecode:
+
+                LuaFunction testfn = new LuaFunction();
+                testfn.Instructions = new List<BCInstruction> { new BCInstruction(BCOpcode.CALL, new List<object> { "print", "This is from the function!" }), new BCInstruction(BCOpcode.RETURNVOID) };
+                testfn.Name = "testfn";
+
+                stateTest.functions.Add("testfn", testfn);
+
+                List<BCInstruction> instrcts = new List<BCInstruction>
+                {
+                    new BCInstruction(BCOpcode.CALL, new List<object> {"print", "Function Test Initialized!"}),
+                    new BCInstruction(BCOpcode.CALL, new List<object> {"testfn"})
+                };
+
+                stateTest.ExecuteInstructions(instrcts);
             }
         }
     }
