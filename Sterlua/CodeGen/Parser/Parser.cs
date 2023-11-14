@@ -226,6 +226,12 @@ namespace Sterlua.CodeGen.Parser
             throw new ParserException("expression missing. "+CurrentToken.Location.ToString());
         }
 
+        public ReturnStatement ParseReturn()
+        {
+            Consume(TokenType.k_return);
+            return new ReturnStatement(ParseExpression());
+        }
+
         public Statement ParseStatement()
         {
             switch (CurrentToken.Type)
@@ -249,6 +255,8 @@ namespace Sterlua.CodeGen.Parser
                     {
                         return ParseExprStmt();
                     }
+                case TokenType.k_return:
+                    return ParseReturn();
 
             }
 

@@ -18,6 +18,7 @@ namespace Sterlua.CodeGen.Semantic
         public Scope GlobalScope = new Scope(); // basically anything that is not scoped, gets placed here.
         public Stack<Scope> Scopes = new Stack<Scope>();
         public Scope CurrentScope;
+        public FunctionSymbol CurrentFunction; // used for return types;
         public List<BStatement> BStatements = new List<BStatement>();
 
         public bool SymbolExists(string Name) => (CurrentScope.SymbolExists(Name)) || (GlobalScope.SymbolExists(Name));
@@ -75,6 +76,9 @@ namespace Sterlua.CodeGen.Semantic
 
                 if(fnSym != null)
                 {
+                    if (fnSym.Arguments.Count != expr.Parameters.Count)
+                        throw new BinderException("E3952: argument count mismatch.");
+
                     int i = 0;
                     foreach(var arg in fnSym.Arguments)
                     {
@@ -150,11 +154,12 @@ namespace Sterlua.CodeGen.Semantic
                             else
                                 throw new BinderException("E3152: cannot declare function in a non-global scope.");
 
+                            CurrentFunction = sym;
                             CurrentScope = new Scope();
                             Scopes.Push(CurrentScope);
                             var bst = BindStatements(fstmt.Body.statements);
                             Scopes.Pop();
-
+                            CurrentFunction = null;
                             bstmts.Add(new BFunctionStatement(sym, new BBlockStatement(bst)));
                         }
                         else
@@ -164,6 +169,16 @@ namespace Sterlua.CodeGen.Semantic
                     case ExpressionStatement:
                         var expr = stmt as ExpressionStatement;
                         bstmts.Add(new BExpressionStatement(BindExpression(expr.expr) as BExpression));
+                        break;
+                    case ReturnStatement:
+                        var ret = stmt as ReturnStatement;
+                        if (CurrentFunction != null)
+                        {
+                            if(CurrentFunction.ReturnType.Name != GetType(ret.exp).Name)
+                                throw new BinderException("E3752: type mismatch, expected type '" + CurrentFunction.ReturnType.Name + "' got type '" + GetType(ret.exp).Name + "'.");
+                        }
+                        else
+                            throw new BinderException("E3452: return outside of function.");
                         break;
                 }
             }
